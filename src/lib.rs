@@ -5,6 +5,8 @@ use systems::{
     input::{move_entities, scroll_events},
 };
 
+use wasm_bindgen::prelude::wasm_bindgen;
+
 mod components {
     pub mod main_camera;
     pub mod mover;
@@ -14,9 +16,21 @@ mod systems {
     pub mod input;
 }
 
+#[wasm_bindgen]
 pub fn main() {
+    #[cfg(target_arch = "wasm32")]
+    console_error_panic_hook::set_once();
+
     App::new()
-        .add_plugins(DefaultPlugins)
+        .add_plugins(DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                title: "Noob Game".to_string(),
+                #[cfg(target_arch = "wasm32")]
+                canvas: Some(String::from(".game")),
+                ..default()
+            }),
+            ..default()
+        }))
         .add_startup_system(setup)
         .add_system(camera_follow)
         .add_system(move_entities)

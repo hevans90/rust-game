@@ -5,7 +5,7 @@ use bevy::{
 
 use crate::components::{main_camera::MainCamera, mover::Mover};
 
-fn radian_to_vector2(mut radian: f32) -> Vec2 {
+fn radian_to_vector2(radian: f32) -> Vec2 {
     return Vec2::from_angle(radian).perp();
 }
 

@@ -2116,7 +2116,10 @@ name = "noob_game"
 version = "0.1.0"
 dependencies = [
  "bevy",
+ "console_error_panic_hook",
  "rand",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
